@@ -1,5 +1,6 @@
 import { Command } from "@oclif/command";
 import { prompt } from "inquirer";
+import chalk from "chalk";
 import fetch from "node-fetch";
 import {
   uniqueNamesGenerator,
@@ -9,6 +10,7 @@ import {
 import audiences from "../lib/audiences";
 import { UserInput, generateFromInput } from "../lib/generate-from-input";
 import { getFirefoxDesktopReleases } from "../lib/release-utils";
+import { openRS } from "../lib/open-rs";
 
 function whenDesktop(answers: UserInput) {
   return answers.application === "firefox-desktop";
@@ -126,6 +128,65 @@ export default class Create extends Command {
     ]);
 
     const result = generateFromInput(userInput);
+
     this.log(JSON.stringify(result, null, 2));
+
+    if (!whenDesktop(userInput)) {
+      // No RS workflow for mobile yet
+      return;
+    }
+
+    const { shouldTest } = await prompt([
+      {
+        type: "confirm",
+        name: "shouldTest",
+        message: "Do you want to test your experiment?",
+        default: false,
+      },
+    ]);
+    if (!shouldTest) {
+      return;
+    }
+
+    await prompt([
+      {
+        type: "confirm",
+        name: "isConnected",
+        message:
+          "First, make sure you are connected to the VPN. Have you finished connecting?",
+        default: true,
+      },
+    ]);
+
+    this.log("> Ok, first you will need to open the Remote Settings admin.");
+    const url = await openRS();
+    this.log(
+      chalk.grey(`  If it doesn't open automatically, open this URL in your browser:
+  ${url}`)
+    );
+
+    await prompt([
+      {
+        type: "confirm",
+        name: "hasPasted",
+        message:
+          "Have you pasted in your JSON and pressed the 'Create record' button?",
+        default: true,
+      },
+    ]);
+
+    await prompt([
+      {
+        type: "confirm",
+        name: "hasRequestedReview",
+        message: "Ok, now look for the 'Request Review' button and press that.",
+        default: true,
+      },
+    ]);
+
+    this
+      .log(`> Good job! Now you need to ask someone to review your staging changes.
+  When that's done, you can use the Remote Settings devtools to set the URL of your browser
+  to the RS staging server and you should see your new test experiment!`);
   }
 }
