@@ -24,7 +24,7 @@ export default class Create extends Command {
       {
         type: "input",
         name: "slug",
-        message: "Choose a unique experiments slug (hyphen-separated)",
+        message: "Choose a unique experiment slug (hyphen-separated)",
         default: uniqueNamesGenerator({
           dictionaries: [adjectives, colors],
           separator: "-",
@@ -40,12 +40,23 @@ export default class Create extends Command {
           return true;
         },
       },
-
+      {
+        type: "input",
+        name: "userFacingName",
+        message: "Choose a public name",
+        default: "Diagnostic test experiment",
+      },
+      {
+        type: "input",
+        name: "userFacingDescription",
+        message: "Choose a public description",
+        default: "This is a test experiment for diagnostic purposes.",
+      },
       {
         type: "list",
         name: "application",
         message: "Which application do you want to run your experiment on?",
-        choices: ["firefox-desktop", "fenix"],
+        choices: ["firefox-desktop", "fenix", "reference-browser"],
       },
       {
         type: "list",
@@ -68,7 +79,7 @@ export default class Create extends Command {
         name: "customMinVersion",
         message: "Custom minimum version (e.g. 82.1)",
         when(answers) {
-          return !answers.minVersion;
+          return whenDesktop(answers) && !answers.minVersion;
         },
       },
       {
@@ -104,6 +115,7 @@ export default class Create extends Command {
             value: targeting,
           })),
         ],
+        when: whenDesktop,
       },
       {
         type: "number",

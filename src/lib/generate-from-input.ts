@@ -8,11 +8,16 @@ export interface UserInput {
   audience: string;
   channel: string;
   minVersion: string;
+  customMinVersion?: string;
+  customFeatureId?: string;
   populationPercentage: number;
+  userFacingDescription: string;
+  userFacingName: string;
 }
 
 export function renderDesktopTargetingString(userInput: UserInput) {
-  let targetingString = `version|versionCompare('${userInput.minVersion}')`;
+  const minVersion = userInput.customMinVersion || userInput.minVersion;
+  let targetingString = `version|versionCompare('${minVersion}')`;
   if (userInput.channel) {
     targetingString += ` && browserSettings.update.channel == '${userInput.channel}'`;
   }
@@ -32,7 +37,7 @@ export function generateFromInput(userInput: UserInput) {
       if (userInput.featureId) {
         const factory = factories[userInput.featureId];
         branch.feature = {
-          featureId: userInput.featureId,
+          featureId: userInput.customFeatureId || userInput.featureId,
           enabled: true,
           value: factory ? factory(userInput.slug, branchSlug) : {},
         };
@@ -45,8 +50,8 @@ export function generateFromInput(userInput: UserInput) {
     slug: userInput.slug,
     id: userInput.slug,
     application: userInput.application,
-    userFacingName: "TODO Name",
-    userFacingDescription: "TODO Desc",
+    userFacingName: userInput.userFacingName,
+    userFacingDescription: userInput.userFacingDescription,
     isEnrollmentPaused: false,
     bucketConfig: {
       namespace: userInput.featureId ? userInput.featureId : userInput.slug,
