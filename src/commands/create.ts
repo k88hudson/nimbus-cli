@@ -131,11 +131,6 @@ export default class Create extends Command {
 
     this.log(JSON.stringify(result, null, 2));
 
-    if (!whenDesktop(userInput)) {
-      // No RS workflow for mobile yet
-      return;
-    }
-
     const { shouldTest } = await prompt([
       {
         type: "confirm",
@@ -148,18 +143,21 @@ export default class Create extends Command {
       return;
     }
 
+    const collectionId = whenDesktop(userInput)
+      ? "nimbus-desktop-experiments"
+      : "nimbus-mobile-experiments";
+
     await prompt([
       {
         type: "confirm",
         name: "isConnected",
-        message:
-          "First, make sure you are connected to the VPN. Have you finished connecting?",
+        message: `First, make sure you are connected to the VPN. Have you finished connecting?`,
         default: true,
       },
     ]);
 
     this.log("> Ok, first you will need to open the Remote Settings admin.");
-    const url = await openRS();
+    const url = await openRS(collectionId);
     this.log(
       chalk.grey(`  If it doesn't open automatically, open this URL in your browser:
   ${url}`)
@@ -186,7 +184,7 @@ export default class Create extends Command {
 
     this
       .log(`> Good job! Now you need to ask someone to review your staging changes.
-  When that's done, you can use the Remote Settings devtools to set the URL of your browser
-  to the RS staging server and you should see your new test experiment!`);
+  After that, your experiment should show up here:
+  https://settings.stage.mozaws.net/v1/buckets/main/collections/${collectionId}/records`);
   }
 }
