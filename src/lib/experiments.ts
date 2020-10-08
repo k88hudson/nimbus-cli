@@ -1,3 +1,5 @@
+// TODO - pull from nimbus-shared
+
 /**
  * The experiment definition accessible to:
  * 1. The Nimbus SDK via Remote Settings

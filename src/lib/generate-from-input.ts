@@ -1,4 +1,4 @@
-import { NimbusExperiment, Branch } from "./types";
+import { NimbusExperiment, Branch } from "./experiments";
 import { factories } from "./messaging-factories";
 
 export interface UserInput {
