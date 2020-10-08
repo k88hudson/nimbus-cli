@@ -19,7 +19,7 @@ export function renderDesktopTargetingString(userInput: UserInput) {
   const minVersion = userInput.customMinVersion || userInput.minVersion;
   let targetingString = `version|versionCompare('${minVersion}') <= 0`;
   if (userInput.channel) {
-    targetingString += ` && browserSettings.update.channel == '${userInput.channel}'`;
+    targetingString += ` && channel == '${userInput.channel}'`;
   }
   if (userInput.audience) {
     targetingString += ` && ${userInput.audience}`;

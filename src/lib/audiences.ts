@@ -18,7 +18,7 @@ export default {
     description:
       "First start-up users (e.g. for about:welcome) with an en-* locale using the release channel.",
     targeting:
-      "localeLanguageCode == 'en' && (isFirstStartup || '{slug}' in activeExperiments)",
+      "localeLanguageCode == 'en' && (isFirstStartup || experiment.slug in activeExperiments)",
     desktop_telemetry:
       "STARTS_WITH(environment.settings.locale, 'en') AND payload.info.profile_subsession_counter = 1",
   },
