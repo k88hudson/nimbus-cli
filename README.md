@@ -21,7 +21,7 @@ $ npm install -g nimbus-cli
 $ nimbus-cli COMMAND
 running command...
 $ nimbus-cli (-v|--version|version)
-nimbus-cli/0.1.2 darwin-x64 node-v14.3.0
+nimbus-cli/0.1.3 darwin-x64 node-v14.3.0
 $ nimbus-cli --help [COMMAND]
 USAGE
   $ nimbus-cli COMMAND
@@ -44,7 +44,7 @@ USAGE
   $ nimbus-cli create
 ```
 
-_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.1.2/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.1.3/src/commands/create.ts)_
 
 ## `nimbus-cli help [COMMAND]`
 
