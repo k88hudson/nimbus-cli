@@ -13,9 +13,11 @@
     "@oclif/plugin-help": "^3.2.0",
     "inquirer": "^7.3.3",
     "node-fetch": "^2.6.1",
+    "node-webcrypto-ossl": "^2.1.2",
     "open": "^7.3.0",
     "tslib": "^1.13.0",
-    "unique-names-generator": "^4.3.1"
+    "unique-names-generator": "^4.3.1",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -26,6 +28,7 @@
     "@types/node": "^10.17.37",
     "@types/node-fetch": "^2.5.7",
     "@types/open": "^6.2.1",
+    "@types/uuid": "^8.3.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",

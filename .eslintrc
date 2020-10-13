@@ -6,6 +6,7 @@
     "semi": "off",
     "operator-linebreak": "off",
     "arrow-parens": "off",
-    "indent": "off"
+    "indent": "off",
+    "no-await-in-loop": "off"
   }
 }

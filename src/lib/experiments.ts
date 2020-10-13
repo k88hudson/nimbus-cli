@@ -82,7 +82,7 @@ export interface NimbusExperiment {
   filter_expression?: string;
 }
 
-interface BucketConfig {
+export interface BucketConfig {
   /**
    * A unique, stable identifier for the user used as an input to bucket hashing
    */
@@ -103,7 +103,7 @@ interface BucketConfig {
   total: number;
 }
 
-interface FeatureConfig {
+export interface FeatureConfig {
   /** The identifier for the feature flag */
   featureId: string;
 
