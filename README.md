@@ -21,7 +21,7 @@ $ npm install -g nimbus-cli
 $ nimbus-cli COMMAND
 running command...
 $ nimbus-cli (-v|--version|version)
-nimbus-cli/0.2.0 darwin-x64 node-v14.3.0
+nimbus-cli/0.2.1 darwin-x64 node-v14.3.0
 $ nimbus-cli --help [COMMAND]
 USAGE
   $ nimbus-cli COMMAND
@@ -34,6 +34,7 @@ USAGE
 <!-- commands -->
 * [`nimbus-cli create`](#nimbus-cli-create)
 * [`nimbus-cli help [COMMAND]`](#nimbus-cli-help-command)
+* [`nimbus-cli preview`](#nimbus-cli-preview)
 
 ## `nimbus-cli create`
 
@@ -44,7 +45,7 @@ USAGE
   $ nimbus-cli create
 ```
 
-_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.2.0/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.2.1/src/commands/create.ts)_
 
 ## `nimbus-cli help [COMMAND]`
 
@@ -62,4 +63,15 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `nimbus-cli preview`
+
+find test ids to force an experiment branch
+
+```
+USAGE
+  $ nimbus-cli preview
+```
+
+_See code: [src/commands/preview.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.2.1/src/commands/preview.ts)_
 <!-- commandsstop -->
