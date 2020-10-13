@@ -71,7 +71,7 @@ async function truncatedHash(data: any): Promise<string> {
 
   // truncate hash to 12 characters (2^48), because the full hash is larger
   // than JS can meaningfully represent as a number.
-  return crypto.createHmac("sha256", input).digest("hex").slice(0, 12);
+  return crypto.createHash("sha256").update(input).digest("hex").slice(0, 12);
 }
 
 /**
@@ -189,7 +189,7 @@ export async function chooseBranch(
 ) {
   let sdkId: string;
   switch (application) {
-    case "desktop":
+    case "firefox-desktop":
       // https://searchfox.org/mozilla-central/source/toolkit/components/messaging-system/experiments/ExperimentManager.jsm
       sdkId = "experimentmanager";
       break;
@@ -205,7 +205,6 @@ export async function chooseBranch(
   //   branches that contain the same buckets as the recipe sampling will
   //   receive users)
   const input = `${sdkId}-${randomizationUnitUniqueId}-${slug}-branch`;
-
   const index = await ratioSample(input, ratios);
   return branches[index];
 }
