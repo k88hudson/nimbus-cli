@@ -5,11 +5,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 "use strict";
+import * as crypto from "crypto";
 
-import { Crypto } from "node-webcrypto-ossl";
 import { BucketConfig, NimbusExperiment } from "./experiments";
 import { v4 as uuidv4 } from "uuid";
-const crypto = new Crypto();
 
 const hashBits = 48;
 const hashLength = hashBits / 4; // each hexadecimal digit represents 4 bits
@@ -29,30 +28,6 @@ function fractionToKey(frac: number): string {
   return Math.floor(frac * hashMultiplier)
     .toString(16)
     .padStart(hashLength, "0");
-}
-
-/**
- * Map from the range [0, 1] to [0, 2^48].
- * @param  {number} frac A float from 0.0 to 1.0.
- * @return {string} A 48 bit number represented in hex, padded to 12 characters.
- */
-
-/**
- * @param {ArrayBuffer} buffer Data to convert
- * @returns {String}    `buffer`'s content, converted to a hexadecimal string.
- */
-function bufferToHex(buffer: ArrayBuffer): string {
-  const hexCodes: Array<string> = [];
-  const view = new DataView(buffer);
-  for (let i = 0; i < view.byteLength; i += 4) {
-    // Using getUint32 reduces the number of iterations needed (we process 4 bytes each time)
-    const value = view.getUint32(i);
-    // toString(16) will give the hex representation of the number without padding
-    hexCodes.push(value.toString(16).padStart(8, "0"));
-  }
-
-  // Join all the hex strings into one
-  return hexCodes.join("");
 }
 
 /**
@@ -89,12 +64,14 @@ function isHashInBucket(
  * @promise A hash of `data`, truncated to the 12 most significant characters.
  */
 async function truncatedHash(data: any): Promise<string> {
-  const hasher = crypto.subtle;
   const input = new TextEncoder().encode(JSON.stringify(data));
-  const hash = await hasher.digest("SHA-256", input);
+
+  // const hash = await hasher.digest("SHA-256", input);
+  // return bufferToHex(hash).slice(0, 12);
+
   // truncate hash to 12 characters (2^48), because the full hash is larger
   // than JS can meaningfully represent as a number.
-  return bufferToHex(hash).slice(0, 12);
+  return crypto.createHmac("sha256", input).digest("hex").slice(0, 12);
 }
 
 /**
