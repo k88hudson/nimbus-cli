@@ -11,6 +11,7 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
+    "fast-text-encoding": "^1.0.3",
     "inquirer": "^7.3.3",
     "node-fetch": "^2.6.1",
     "open": "^7.3.0",
