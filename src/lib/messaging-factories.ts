@@ -11,7 +11,7 @@ export function messagingSystemFactory(
   props: any
 ) {
   return {
-    id: `${slug}-${branch}`,
+    id: `${slug}:${branch}`,
     template,
     ...props,
   };
@@ -54,6 +54,7 @@ export const factories: {
 
   aboutwelcome: (slug: string, branch: string) => {
     return messagingSystemFactory(slug, branch, "multistage", {
+      id: `aw-${branch}`,
       screens: [],
     });
   },
