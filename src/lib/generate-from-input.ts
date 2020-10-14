@@ -54,7 +54,7 @@ export function generateFromInput(userInput: UserInput) {
     userFacingDescription: userInput.userFacingDescription,
     isEnrollmentPaused: false,
     bucketConfig: {
-      namespace: userInput.featureId ? userInput.featureId : userInput.slug,
+      namespace: userInput.slug,
       randomizationUnit:
         userInput.application === "firefox-desktop"
           ? "normandy_id"

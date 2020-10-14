@@ -26,7 +26,8 @@ export default class Create extends Command {
       {
         type: "input",
         name: "slug",
-        message: "Choose a unique experiment slug (hyphen-separated)",
+        message:
+          "Choose a unique experiment slug (hyphen-separated) e.g. my-blue-button-123",
         default: uniqueNamesGenerator({
           dictionaries: [adjectives, colors],
           separator: "-",
@@ -45,7 +46,7 @@ export default class Create extends Command {
       {
         type: "input",
         name: "userFacingName",
-        message: "Choose a public name",
+        message: "Choose a public name e.g. My blue button test",
         default: "Diagnostic test experiment",
       },
       {
@@ -90,7 +91,7 @@ export default class Create extends Command {
         message: "Which feature do you want configure?",
         choices: [
           { name: "(none)", value: "" },
-          "about-welcome",
+          "aboutwelcome",
           "cfr",
           "moments",
           "custom...",

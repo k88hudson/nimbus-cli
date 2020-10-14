@@ -30,7 +30,7 @@ export const factories: {
       },
       priority: 1,
       content: {
-        bucket_id: `${slug}-${branch}`,
+        bucket_id: `${slug}:${branch}`,
       },
     });
   },
@@ -40,7 +40,7 @@ export const factories: {
       groups: ["moments-pages"],
       trigger: { id: "momentsUpdate" },
       content: {
-        bucket_id: `${slug}-${branch}`,
+        bucket_id: `${slug}:${branch}`,
         action: {
           id: "moments-wnp",
           data: {
@@ -52,7 +52,7 @@ export const factories: {
     });
   },
 
-  "about-welcome": (slug: string, branch: string) => {
+  aboutwelcome: (slug: string, branch: string) => {
     return messagingSystemFactory(slug, branch, "multistage", {
       screens: [],
     });
