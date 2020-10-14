@@ -1,7 +1,7 @@
 {
   "name": "nimbus-cli",
   "description": "An experimental cli for creating nimbus experiments",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "Kate Hudson @k88hudson",
   "bin": {
     "nimbus-cli": "./bin/run"
