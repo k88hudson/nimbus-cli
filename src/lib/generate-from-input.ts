@@ -17,7 +17,7 @@ export interface UserInput {
 
 export function renderDesktopTargetingString(userInput: UserInput) {
   const minVersion = userInput.customMinVersion || userInput.minVersion;
-  let targetingString = `version|versionCompare('${minVersion}') <= 0`;
+  let targetingString = `version|versionCompare('${minVersion}') >= 0`;
   if (userInput.channel) {
     targetingString += ` && channel == '${userInput.channel}'`;
   }
