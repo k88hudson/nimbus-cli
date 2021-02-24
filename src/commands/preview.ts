@@ -14,7 +14,7 @@ interface UserInput {
 type Record = NimbusExperiment;
 
 const ENDPOINTS = {
-  release: "firefox.settings.services.mozilla.com",
+  prod: "firefox.settings.services.mozilla.com",
   staging: "settings.stage.mozaws.net",
 };
 type RSEnvironment = keyof typeof ENDPOINTS;
@@ -78,14 +78,14 @@ export default class Preview extends Command {
         type: "list",
         name: "env",
         message: "Which environment?",
-        choices: ["staging", "release"],
+        choices: ["prod", "staging"],
         default: "staging",
       },
       {
         type: "list",
         name: "collectionId",
         message: "Which collection?",
-        choices: ["nimbus-mobile-experiments", "nimbus-desktop-experiments"],
+        choices: ["nimbus-preview", "nimbus-mobile-experiments", "nimbus-desktop-experiments"],
       },
     ]);
     const { valid, invalid } = await getSlugs(userInput);
