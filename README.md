@@ -21,7 +21,7 @@ $ npm install -g nimbus-cli
 $ nimbus-cli COMMAND
 running command...
 $ nimbus-cli (-v|--version|version)
-nimbus-cli/0.2.6 darwin-x64 node-v14.3.0
+nimbus-cli/0.2.6 darwin-x64 node-v14.14.0
 $ nimbus-cli --help [COMMAND]
 USAGE
   $ nimbus-cli COMMAND
