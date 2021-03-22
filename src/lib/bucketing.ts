@@ -229,9 +229,13 @@ export async function chooseBranch(
 export async function getTestIds(experiment: NimbusExperiment) {
   const branchValues: { [branchId: string]: string } = {};
   const { branches, bucketConfig } = experiment;
-
-  while (Object.keys(branchValues).length < branches.length + 1) {
+  let count = 0;
+  while (
+    Object.keys(branchValues).length < branches.length + 1 &&
+    count < 10000
+  ) {
     const id = uuidv4();
+    count++;
     const enrolls = await bucketSample(
       [id, bucketConfig.namespace],
       bucketConfig.start,

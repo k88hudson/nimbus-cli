@@ -18,7 +18,10 @@ const ENDPOINTS = {
   staging: "settings.stage.mozaws.net",
 };
 type RSEnvironment = keyof typeof ENDPOINTS;
-type Collection = "nimbus-desktop-experiments" | "nimbus-mobile-experiments";
+type Collection =
+  | "nimbus-desktop-experiments"
+  | "nimbus-mobile-experiments"
+  | "nimbus-preview";
 
 async function getRecordsForCollection(
   collectionId: Collection,
@@ -38,19 +41,6 @@ async function getPromptValue<T>(question: DistinctQuestion<T>) {
   ]);
   return value;
 }
-
-// async function findSlug(slug: string) {
-//   for (const collectionId of [
-//     "nimbus-desktop-experiments",
-//     "nimbus-mobile-experiments",
-//   ]) {
-//     const records = await getRecordsForCollection(collectionId, "staging");
-//     const foundRecord = records.find((r) => r.slug === slug);
-//     if (foundRecord) {
-//       return foundRecord;
-//     }
-//   }
-// }
 
 async function getSlugs({
   collectionId,
@@ -79,13 +69,17 @@ export default class Preview extends Command {
         name: "env",
         message: "Which environment?",
         choices: ["prod", "staging"],
-        default: "staging",
+        default: "prod",
       },
       {
         type: "list",
         name: "collectionId",
         message: "Which collection?",
-        choices: ["nimbus-preview", "nimbus-mobile-experiments", "nimbus-desktop-experiments"],
+        choices: [
+          "nimbus-preview",
+          "nimbus-mobile-experiments",
+          "nimbus-desktop-experiments",
+        ],
       },
     ]);
     const { valid, invalid } = await getSlugs(userInput);
