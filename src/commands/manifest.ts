@@ -2,6 +2,7 @@ import { Command, flags } from "@oclif/command";
 import chalk from "chalk";
 import fetch from "node-fetch";
 import { NodeVM } from "vm2";
+import { renderSchema, ManifestConfig } from "../lib/manifest-to-schema";
 
 function getDesktopManifestURI(subpath: string): string {
   return `https://hg.mozilla.org/${subpath}/raw-file/tip/toolkit/components/nimbus/FeatureManifest.js`;
@@ -25,6 +26,9 @@ export default class Manifest extends Command {
       char: "c",
       default: "nightly",
       options: Object.keys(DESKTOP_CHANNELS),
+    }),
+    schema: flags.string({
+      description: "Convert variables for manifest entry to json schema",
     }),
   };
 
@@ -53,6 +57,24 @@ export default class Manifest extends Command {
     if (!manifest) {
       throw new Error("Tried to parse manfiest but no result was returned");
     }
-    this.log(JSON.stringify(manifest, null, 2));
+    if (flags.schema) {
+      const config = manifest[flags.schema];
+      if (!config) {
+        throw new Error(
+          `No manifest entry found for ${
+            flags.schema
+          }. Entries include ${Object.keys(manifest).join(", ")}`
+        );
+      }
+      this.log(
+        JSON.stringify(
+          renderSchema(flags.schema, config as ManifestConfig),
+          null,
+          2
+        )
+      );
+    } else {
+      this.log(JSON.stringify(manifest, null, 2));
+    }
   }
 }
