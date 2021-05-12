@@ -21,7 +21,7 @@ $ npm install -g nimbus-cli
 $ nimbus-cli COMMAND
 running command...
 $ nimbus-cli (-v|--version|version)
-nimbus-cli/0.4.0 darwin-x64 node-v14.14.0
+nimbus-cli/0.5.0 darwin-x64 node-v14.14.0
 $ nimbus-cli --help [COMMAND]
 USAGE
   $ nimbus-cli COMMAND
@@ -46,7 +46,7 @@ USAGE
   $ nimbus-cli create
 ```
 
-_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.4.0/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.5.0/src/commands/create.ts)_
 
 ## `nimbus-cli help [COMMAND]`
 
@@ -75,9 +75,10 @@ USAGE
 
 OPTIONS
   -c, --channel=nightly|beta|release  [default: nightly] Channel. NOTE: Desktop only
+  --schema=schema                     Convert variables for manifest entry to json schema
 ```
 
-_See code: [src/commands/manifest.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.4.0/src/commands/manifest.ts)_
+_See code: [src/commands/manifest.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.5.0/src/commands/manifest.ts)_
 
 ## `nimbus-cli preview`
 
@@ -88,5 +89,5 @@ USAGE
   $ nimbus-cli preview
 ```
 
-_See code: [src/commands/preview.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.4.0/src/commands/preview.ts)_
+_See code: [src/commands/preview.ts](https://github.com/k88hudson/nimbus-cli/blob/v0.5.0/src/commands/preview.ts)_
 <!-- commandsstop -->
